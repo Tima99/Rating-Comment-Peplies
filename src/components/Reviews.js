@@ -38,8 +38,10 @@ const Reviews = () => {
         const { data: reviews } = await axios.get("/api/reviews/" + tube?.id + `?start=${startLimit}&end=${dataToFetch}`);
         if (reviews.length <= 0) return;
 
+        // console.log(reviews)
+        
         const $reviews = reviews.map((_) => {
-            const inarr = "[" + _.reply + "]";
+            const inarr = "[" + _?.reply + "]";
             _.reply = JSON.parse(inarr).filter((_) => _.id);
             return _;
         });
@@ -85,9 +87,9 @@ const Reviews = () => {
         const elapsedTimeInYears = elapsedTimeInDays / 365;
 
         if (minutes < 60) {
-            return `${Math.round(minutes)} minutes ago`;
+            return `${Math.floor(minutes)} minutes ago`;
         } else if (elapsedTimeInDays < 1) {
-            return `${Math.round(minutes / 60)} hours ago`;
+            return `${Math.floor(minutes / 60)} hours ago`;
         } else if (elapsedTimeInDays < 365) {
             return `${Math.floor(elapsedTimeInDays)} days ago`;
         } else {
@@ -157,7 +159,7 @@ const Reviews = () => {
             direction="horizontal"
             style={{
                 zIndex: 999,
-                translate: "0 2.6rem",
+                translate: "0 2.55rem",
                 left: 0,
                 overflow: "scroll",
                 height: "auto",
@@ -296,6 +298,7 @@ const Reviews = () => {
                                                     .classList.remove("onreply-pop-up");
                                                 document.getElementById("comment" + replyTo.id).classList.remove("border-green");
                                                 setReplyTo((prev) => ({ name: null, id: null }));
+                                                setRating(0)
                                             }}
                                         >
                                             Cancel

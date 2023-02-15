@@ -7,12 +7,20 @@ const CommentCard = ({ comment: _ }) => {
 
     if (!Array.isArray(_.reply)) return;
 
-
     return (
-        <Card style={{ width: "18rem"}} className={`w-100 pb-2 review-container ${_.replyparent && 'linear-g'}`} id={"comment" + _.id} >
+        <Card style={{ width: "18rem" }} className={`w-100 pb-2 review-container ${_.replyparent && "linear-g"}`} id={"comment" + _.id}>
             <Card.Body>
                 <Card.Title>
-                    <div>{_.name}</div>
+                    <div>
+                        <img src={_.picture || ''} alt="" 
+                            style={{
+                                width : '30px',
+                                borderRadius: '100%'
+                            }}
+                        />
+                        &nbsp;&nbsp;
+                        {_.name}
+                    </div>
                     {_.rating != -1 && _.rating && (
                         <>
                             <span style={{ fontSize: ".8rem" }}>{"⭐".repeat(_.rating)}</span>
@@ -29,7 +37,7 @@ const CommentCard = ({ comment: _ }) => {
                             onClick={(e) => {
                                 e.preventDefault();
                                 const id = new URL(e.currentTarget.href).hash;
-                                document.querySelector(id).scrollIntoView({behavior: "smooth"});
+                                document.querySelector(id).scrollIntoView({ behavior: "smooth" });
                                 document.querySelector(id).classList.add("fade-color");
                             }}
                         >
@@ -44,18 +52,14 @@ const CommentCard = ({ comment: _ }) => {
                         Reply
                     </Button>
                     {_.reply.length > 0 && (
-                        <Button
-                            variant=""
-                            className="p-0 mt-1"
-                            onClick={(e) => setExpandReplies((prev) => !prev)}
-                        >
+                        <Button variant="" className="p-0 mt-1" onClick={(e) => setExpandReplies((prev) => !prev)}>
                             <small>Replies {_.reply.length}</small>
                         </Button>
                     )}
                 </div>
             </Card.Body>
 
-            {_.reply.length > 0 && (
+            {_.reply?.length > 0 && (
                 <Stack
                     className="replies-container gap-1"
                     style={{
@@ -63,8 +67,8 @@ const CommentCard = ({ comment: _ }) => {
                         display: expandReplies ? "flex" : "none",
                     }}
                 >
-                    {_.reply.map((reply, i) => {
-                        const replies = JSON.parse(reply.reply);
+                    {_.reply?.map((reply, i) => {
+                        const replies = reply.reply && JSON.parse(reply.reply);
                         return <CommentCard comment={{ ...reply, reply: replies }} key={reply.id} />;
                     })}
                 </Stack>

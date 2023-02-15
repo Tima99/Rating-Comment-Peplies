@@ -80,11 +80,11 @@
 }
 .slide-exit {
     transform: translateX(0%);
-    animation: drawerExit 0.3s 1 both;
+    animation: drawerExit 0.2s 1 both;
 }
 .slide-exit-left {
     transform: translateY(0%);
-    animation: drawerExitLeft 0.3s 1 both;
+    animation: drawerExitLeft 0.2s 1 both;
 }
 
 @keyframes drawer {
@@ -168,3 +168,12 @@
     border: 1px solid green !important;
 }
 
+.video-card:hover{
+    transition: all .1s;
+    z-index: 999;
+    scale: 1.03;
+}
+
+#videos-container::-webkit-scrollbar{
+    display: none;
+}

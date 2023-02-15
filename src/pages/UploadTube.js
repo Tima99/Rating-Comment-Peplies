@@ -42,6 +42,7 @@ const UploadTube = () => {
             },
             {
                 headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true
             }
         );
         if(res.status === 200)

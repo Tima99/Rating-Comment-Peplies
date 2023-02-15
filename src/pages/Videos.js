@@ -42,13 +42,13 @@ const Videos = () => {
 
     return (
         <>
-            <Container className="mx-auto mt-3 relative" style={{ height: "80vh" }}>
+            <Container className="mx-auto pt-3 relative" style={{ height: "94.2vh", overflow: 'scroll'}} id={'videos-container'}>
                 <Row>
                     {apiVideos &&
                         apiVideos.map((tube) => {
                             let date = new Date(tube.ts);
                             return (
-                                <Col md={4} xs={12} key={tube.id} id={`tube${tube.id}`}>
+                                <Col md={4} xs={12} key={tube.id} id={`tube${tube.id}`} className={'video-card'}>
                                     <Link to={"/videos/reviews"} state={{tube}}
                                         style={{color: 'black', textDecoration: 'none'}}
                                     >
@@ -74,42 +74,31 @@ const Videos = () => {
                                         <Container className="mt-3">
                                             <Row>
                                                 <Col>
-                                                    <h5>{tube.title}</h5>
+                                                    <h5
+                                                        style={{
+                                                            whiteSpace: 'nowrap',
+                                                            textOverflow: 'ellipsis',
+                                                            overflow: 'hidden'
+                                                        }}
+                                                    >{tube.title}</h5>
+                                                    <small 
+                                                        style={{
+                                                            width: '100%'
+                                                        }}
+                                                    >{timeAgo(date)}</small>
                                                 </Col>
-                                                {/* <Col style={{ justifyContent: "flex-end", gap: "1rem", display: "flex" }} onClick={captureReaction}>
-                                                <div className="relative">
-                                                    <i style={{ cursor: "pointer" }} className="reaction-icon" id="like-btn">
-                                                        👍
-                                                    </i>
-                                                    <i style={{ filter: "grayscale(1)", position: "absolute", left: "0", zIndex: "-1" }}>👍</i>
-                                                </div>
-                                                <div className="relative">
-                                                    <i style={{ cursor: "pointer" }} className="reaction-icon" id="clap-btn">
-                                                        👏
-                                                    </i>
-                                                    <i style={{ filter: "grayscale(1)", position: "absolute", left: "0", zIndex: "-1" }}>👏</i>
-                                                </div>
-                                                <div className="relative">
-                                                    <Link
-                                                        to={"/videos/reviews"}
-                                                        state={{tube}}
-                                                    >
-                                                        <i style={{ cursor: "pointer" }} className="reaction-icon">
-                                                            ⛪
-                                                        </i>
-                                                    </Link>
-                                                </div>
-                                            </Col> */}
+                                                
                                             </Row>
                                             <Row>{/* <Col>⭐⭐⭐⭐⭐</Col> */}</Row>
                                             <Stack>
                                                 <div className="d-flex justify-content-between">
-                                                    <h6>{tube.description}</h6>
-                                                    <small>{timeAgo(date)}</small>
+                                                    <h6 >{tube.description.length > 60 ? `${tube.description.slice(0, 60)}...` : tube.description }</h6>
+                                                    
                                                 </div>
                                             </Stack>
                                         </Container>
                                     </Link>
+                                    
                                 </Col>
                             );
                         })}

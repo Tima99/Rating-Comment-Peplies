@@ -8,19 +8,29 @@ const Profile = () => {
     const authUser = useSelector((state) => state.auth);
     const [imageAlternative, setImageAlternative] = useState(false);
 
+    if(!authUser)
+     return(
+        <h3>Loading...</h3>
+     )
+    
     return (
         <Card style={{ width: "18rem" }} className="m-auto mt-5">
             {!imageAlternative ? (
                 <Card.Img
                     variant="top"
                     src={authUser?.picture || ''}
+                    style ={{
+                        width: '150px',
+                        margin: 'auto',
+                        marginTop: '.5rem'
+                    }}
                     onError={(e) => {
                         console.log("image not loaded");
                         setImageAlternative(true)
                     }}
                 />
             ) : (
-                <div className="profile-logo">{authUser?.name[0]}</div>
+                <div className="profile-logo">{authUser?.name?.[0]}</div>
             )}
 
             <Card.Body>
