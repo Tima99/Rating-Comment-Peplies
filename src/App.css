@@ -169,9 +169,9 @@
 }
 
 .video-card:hover{
-    transition: all .1s;
+    transition: all .05s;
     z-index: 999;
-    scale: 1.03;
+    scale: 1.005;
 }
 
 #videos-container::-webkit-scrollbar{
