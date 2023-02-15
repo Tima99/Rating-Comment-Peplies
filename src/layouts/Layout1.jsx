@@ -19,6 +19,8 @@ const Layout1 = () => {
                     <NavLink to={"/profile"} className="text-light text-decoration-none">
                         Profile
                     </NavLink>
+
+                    
                 </div>
             </div>
             <div className="container">
